@@ -20,7 +20,6 @@ from utils.helpers import PAD, UNK, get_target_sent_by_edits, START_TOKEN
 from utils.helpers import get_weights_name
 
 logging.getLogger("werkzeug").setLevel(logging.ERROR)
-logger = logging.getLogger(__file__)
 
 
 class GecBERTModel(object):
@@ -227,8 +226,10 @@ class GecBERTModel(object):
                                                            all_probabilities,
                                                            all_idxs,
                                                            error_probs):
+            print(tokens)
             length = min(len(tokens), self.max_len)
             edits = []
+            edits_full_info = []
 
             # skip whole sentences if there no errors
             if max(idxs) == 0:
@@ -254,12 +255,14 @@ class GecBERTModel(object):
                                                              namespace='labels')
                 action = self.get_token_action(token, i, probabilities[i],
                                                sugg_token)
+                edits_full_info.append([action, sugg_token, token])
                 if not action:
                     continue
 
                 edits.append(action)
+                # print(edits)
             all_results.append(get_target_sent_by_edits(tokens, edits))
-        return all_results
+        return all_results, edits_full_info
 
     def handle_batch(self, full_batch):
         """
@@ -272,6 +275,7 @@ class GecBERTModel(object):
                      if len(full_batch[i]) < self.min_len]
         pred_ids = [i for i in range(len(full_batch)) if i not in short_ids]
         total_updates = 0
+        all_edits = []
 
         for n_iter in range(self.iterations):
             orig_batch = [final_batch[i] for i in pred_ids]
@@ -282,8 +286,10 @@ class GecBERTModel(object):
                 break
             probabilities, idxs, error_probs = self.predict(sequences)
 
-            pred_batch = self.postprocess_batch(orig_batch, probabilities,
+            pred_batch, edits = self.postprocess_batch(orig_batch, probabilities,
                                                 idxs, error_probs)
+            all_edits.extend(edits)
+
             if self.log:
                 print(f"Iteration {n_iter + 1}. Predicted {round(100*len(pred_ids)/batch_size, 1)}% of sentences.")
 
@@ -295,4 +301,4 @@ class GecBERTModel(object):
             if not pred_ids:
                 break
 
-        return final_batch, total_updates
+        return final_batch, total_updates, all_edits
