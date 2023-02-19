@@ -8,12 +8,11 @@ setup(
     py_modules=["gector"],
     version="1.0",
     description="",
-    readme="README.md",
     python_requires=">=3.7",
     author="",
     url="https://github.com/Tequip/gector",
     license="MIT",
-    packages=find_packages('gector', include=['gector.*']),
+    packages=find_packages(),
     install_requires=[
         str(r)
         for r in pkg_resources.parse_requirements(

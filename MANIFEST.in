@@ -1,0 +1,2 @@
+include gector/data/*
+include gector/data/output_vocabulary/*
