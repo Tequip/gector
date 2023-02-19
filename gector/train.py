@@ -13,7 +13,7 @@ from gector.datareader import Seq2LabelsDatasetReader
 from gector.seq2labels_model import Seq2Labels
 from gector.trainer import Trainer
 from gector.tokenizer_indexer import PretrainedBertIndexer
-from utils.helpers import get_weights_name
+from gector.utils.helpers import get_weights_name
 
 
 def fix_seed():

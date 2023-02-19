@@ -6,18 +6,18 @@ class GectorCorrector:
     def __init__(self, weight_path):
           
         self.model = GecBERTModel(vocab_path='data/output_vocabulary',
-                                model_paths=[weight_path],
-                                max_len=100, min_len=3,
-                                iterations=10   ,
-                                min_error_probability=0,
-                                lowercase_tokens=0,
-                                model_name='roberta',
-                                special_tokens_fix=1,
-                                log=False,
-                                confidence=0,
-                                del_confidence=0,
-                                is_ensemble=0,
-                                weigths=None)
+                                  model_paths=[weight_path],
+                                  max_len=100, min_len=3,
+                                  iterations=10,
+                                  min_error_probability=0,
+                                  lowercase_tokens=0,
+                                  model_name='roberta',
+                                  special_tokens_fix=1,
+                                  log=False,
+                                  confidence=0,
+                                  del_confidence=0,
+                                  is_ensemble=0,
+                                  weigths=None)
 
 
     def predict(self, text):
