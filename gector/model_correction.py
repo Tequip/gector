@@ -1,3 +1,4 @@
+import os
 from gector.gec_model import GecBERTModel
 from pyinflect import getAllInflections, getInflection
 
@@ -5,7 +6,7 @@ class GectorCorrector:
 
     def __init__(self, weight_path):
           
-        self.model = GecBERTModel(vocab_path='data/output_vocabulary',
+        self.model = GecBERTModel(vocab_path=os.path.join(os.path.dirname(__file__), 'data', 'output_vocabulary'),
                                   model_paths=[weight_path],
                                   max_len=100, min_len=3,
                                   iterations=10,
