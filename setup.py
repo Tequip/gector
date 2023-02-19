@@ -13,7 +13,7 @@ setup(
     author="",
     url="https://github.com/Tequip/gector",
     license="MIT",
-    packages=['gector', 'gector.*'],
+    packages=find_packages('gector', include=['gector.*']),
     install_requires=[
         str(r)
         for r in pkg_resources.parse_requirements(
