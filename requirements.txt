@@ -7,3 +7,5 @@ sentencepiece==0.1.95
 overrides==4.1.2
 numpy==1.19.5
 pyinflect==0.5.1
+spacy==2.1.9
+    
