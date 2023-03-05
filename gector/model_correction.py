@@ -40,7 +40,7 @@ class GectorCorrector:
             try:
                 edit[0] = (
                 edit[0][0] + deleted_items + appended_items, edit[0][1] + deleted_items + appended_items, edit[0][2])
-                print(edit, 'CONTEXT ', text['words'][edit[0][0]]['text'], text['words'][edit[0][1]]['text'])
+                # print(edit, 'CONTEXT ', text['words'][edit[0][0]]['text'], text['words'][edit[0][1]]['text'])
 
                 if 'append' in edit[1].lower():
                     if edit[0][2] in [',', '.']:

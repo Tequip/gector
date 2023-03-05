@@ -114,7 +114,10 @@ class GecBERTModel(object):
         t11 = time()
         predictions = []
         for batch, model in zip(batches, self.models):
-            batch = util.move_to_device(batch.as_tensor_dict(), 0 if torch.cuda.is_available() else -1)
+            if self.device == "cuda":
+                batch = util.move_to_device(batch.as_tensor_dict(), 0 if torch.cuda.is_available() else -1)
+            else:
+                batch = util.move_to_device(batch.as_tensor_dict(), -1)
             with torch.no_grad():
                 prediction = model.forward(**batch)
             predictions.append(prediction)
