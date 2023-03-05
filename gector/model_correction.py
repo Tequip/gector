@@ -7,7 +7,7 @@ from pyinflect import getAllInflections, getInflection
 
 class GectorCorrector:
 
-    def __init__(self, weight_path):
+    def __init__(self, weight_path, device="cpu"):
 
         self.model = GecBERTModel(vocab_path=os.path.join(os.path.dirname(__file__), 'data', 'output_vocabulary'),
                                   model_paths=[weight_path],
