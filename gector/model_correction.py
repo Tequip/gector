@@ -21,8 +21,8 @@ class GectorCorrector:
                                   confidence=0,
                                   del_confidence=0,
                                   is_ensemble=0,
-                                  weigths=None)
-
+                                  weigths=None,
+                                  device=device)
         self.nlp = spacy.load('en_core_web_sm')
 
     def predict(self, text):
