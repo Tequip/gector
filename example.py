@@ -1,4 +1,4 @@
-from model_correction import GectorCorrector
+from gector.model_correction import GectorCorrector
 
 cg = GectorCorrector('roberta_1_gectorv2.th')
 text = {}

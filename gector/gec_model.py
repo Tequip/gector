@@ -37,9 +37,10 @@ class GecBERTModel(object):
                  confidence=0,
                  del_confidence=0,
                  resolve_cycles=False,
+                 device="cpu"
                  ):
         self.model_weights = list(map(float, weigths)) if weigths else [1] * len(model_paths)
-        self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        self.device = torch.device(device)
         self.max_len = max_len
         self.min_len = min_len
         self.lowercase_tokens = lowercase_tokens
