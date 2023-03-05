@@ -16,8 +16,8 @@ from allennlp.nn import util
 from gector.bert_token_embedder import PretrainedBertEmbedder
 from gector.seq2labels_model import Seq2Labels
 from gector.tokenizer_indexer import PretrainedBertIndexer
-from gector.utils.helpers import PAD, UNK, get_target_sent_by_edits, START_TOKEN
-from gector.utils.helpers import get_weights_name
+from utils.helpers import PAD, UNK, get_target_sent_by_edits, START_TOKEN
+from utils.helpers import get_weights_name
 
 logging.getLogger("werkzeug").setLevel(logging.ERROR)
 
@@ -226,7 +226,7 @@ class GecBERTModel(object):
                                                            all_probabilities,
                                                            all_idxs,
                                                            error_probs):
-            print(tokens)
+
             length = min(len(tokens), self.max_len)
             edits = []
             edits_full_info = []
@@ -258,8 +258,9 @@ class GecBERTModel(object):
                 edits_full_info.append([action, sugg_token, token])
                 if not action:
                     continue
-
-                edits.append(action)
+                else:
+                    edits.append(action)
+                    break
                 # print(edits)
             all_results.append(get_target_sent_by_edits(tokens, edits))
         return all_results, edits_full_info
