@@ -88,13 +88,14 @@ class GectorCorrector:
 
                         base_word = doc[0].lemma_
 
-
                         if 'vbd' in edit[1].split('_')[-1].lower():
                             change_word = getAllInflections(base_word)['VBD'][0]
                         elif 'vbn' in edit[1].split('_')[-1].lower():
                             change_word = getAllInflections(base_word)['VBN'][0]
                         elif 'vbz' in edit[1].split('_')[-1].lower():
                             change_word = getAllInflections(base_word)['VBZ'][0]
+                        elif 'vbg' in edit[1].split('_')[-1].lower():
+                            change_word = getAllInflections(base_word)['VBG'][0]
                         elif 'vb' in edit[1].split('_')[-1].lower():
                             change_word = getAllInflections(base_word)['VB'][0]
                         elif 'agreement_plural' in edit[1].lower():
