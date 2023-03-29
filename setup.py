@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name="gector",
     py_modules=["gector"],
-    version="1.5.5",
+    version="1.5.6",
     description="",
     python_requires=">=3.7",
     author="",

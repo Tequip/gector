@@ -8,22 +8,22 @@ from pyinflect import getAllInflections, getInflection
 
 class GectorCorrector:
 
-    def __init__(self, weight_path):
-          
-        self.model = GecBERTModel(vocab_path='gector/data/output_vocabulary',
-                                model_paths=[weight_path],
-                                max_len=100, min_len=3,
-                                iterations=10   ,
-                                min_error_probability=0,
-                                lowercase_tokens=0,
-                                model_name='roberta',
-                                special_tokens_fix=1,
-                                log=False,
-                                confidence=0,
-                                del_confidence=0,
-                                is_ensemble=0,
-                                weigths=None)
-        
+    def __init__(self, weight_path, device="cpu"):
+
+        self.model = GecBERTModel(vocab_path=os.path.join(os.path.dirname(__file__), 'data', 'output_vocabulary'),
+                                  model_paths=[weight_path],
+                                  max_len=100, min_len=3,
+                                  iterations=10,
+                                  min_error_probability=0,
+                                  lowercase_tokens=0,
+                                  model_name='roberta',
+                                  special_tokens_fix=1,
+                                  log=False,
+                                  confidence=0,
+                                  del_confidence=0,
+                                  is_ensemble=0,
+                                  weigths=None,
+                                  device=device)
         self.nlp = spacy.load('en_core_web_sm')
 
     def _calculate_deleted_appended_words(self, text, index):
